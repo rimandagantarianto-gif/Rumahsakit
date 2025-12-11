@@ -1,14 +1,26 @@
 import { GoogleGenAI } from "@google/genai";
 
-// Initialize the client. 
-// NOTE: In a real Vercel deployment, strictly ensure process.env.API_KEY is defined in Vercel project settings.
-// This code assumes the key is present as per instructions.
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+// We wrap the initialization in a function to prevent the app from crashing 
+// on load if the API key is missing.
+const getAIClient = () => {
+  const apiKey = process.env.API_KEY;
+  if (!apiKey) {
+    console.warn("API Key is missing. Please set VITE_API_KEY in your environment variables.");
+    return null;
+  }
+  return new GoogleGenAI({ apiKey });
+};
 
 const MODEL_ID = "gemini-2.5-flash";
 
 export const generateMedicalSummary = async (patientData: string, query: string) => {
   try {
+    const ai = getAIClient();
+    
+    if (!ai) {
+      return "⚠️ Configuration Error: API Key is missing. Please add 'VITE_API_KEY' to your Vercel Environment Variables.";
+    }
+
     const systemInstruction = `
       You are SCHOA (Smart Clinical & Operational Assistant), a highly advanced medical assistant AI.
       
