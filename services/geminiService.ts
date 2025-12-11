@@ -3,8 +3,7 @@ import { GoogleGenAI } from "@google/genai";
 // Initialize the client. 
 // NOTE: In a real Vercel deployment, strictly ensure process.env.API_KEY is defined in Vercel project settings.
 // This code assumes the key is present as per instructions.
-const apiKey = process.env.API_KEY || 'YOUR_API_KEY_HERE_FOR_LOCAL_DEV'; 
-const ai = new GoogleGenAI({ apiKey: apiKey });
+const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 const MODEL_ID = "gemini-2.5-flash";
 
