@@ -1,0 +1,5 @@
+{
+  "name": "SCHOA - Smart Clinical & Operational Assistant",
+  "description": "A modular hospital system prototype integrating FHIR-standardized health data with Generative AI (Gemini) for administrative efficiency and clinical documentation support.",
+  "requestFramePermissions": []
+}
